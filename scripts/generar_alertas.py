@@ -25,8 +25,9 @@ def serie(medicion: str, campo: str, ventana: str, agregado: str = "mean") -> st
         f'  |> range(start: -{ventana})\n'
         f'  |> filter(fn: (r) => r._measurement == "{medicion}" and r._field == "{campo}" and {SIN_SIM})\n'
         f'  |> group(columns: ["cliente", "sensor"])\n'
-        f'  |> aggregateWindow(every: 1m, fn: {agregado}, createEmpty: false)'
-    )
+        f'  |> aggregateWindow(every: 1m, fn: {agregado}, createEmpty: false)\n'
+        f'  |> keep(columns: ["_time", "_value", "cliente", "sensor"])'   # max/min dejan columnas de texto y Grafana
+    )                                                                       # rechaza la serie ("must be a wide series")
 
 
 def escalar(medicion: str, campo: str, ventana: str, fn: str) -> str:

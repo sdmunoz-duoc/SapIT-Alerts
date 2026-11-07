@@ -21,7 +21,7 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -3m)\n  |> filter(fn: (r) => r._measurement == \"temperatura\" and r._field == \"valor\" and not (exists r.ubicacion and r.ubicacion == \"Simulador\"\
-          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)"
+          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B
@@ -73,7 +73,7 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -3m)\n  |> filter(fn: (r) => r._measurement == \"temperatura\" and r._field == \"valor\" and not (exists r.ubicacion and r.ubicacion == \"Simulador\"\
-          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)"
+          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B
@@ -125,7 +125,7 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -3m)\n  |> filter(fn: (r) => r._measurement == \"humedad\" and r._field == \"valor\" and not (exists r.ubicacion and r.ubicacion == \"Simulador\"\
-          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)"
+          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B
@@ -177,7 +177,7 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -3m)\n  |> filter(fn: (r) => r._measurement == \"humedad\" and r._field == \"valor\" and not (exists r.ubicacion and r.ubicacion == \"Simulador\"\
-          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)"
+          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B
@@ -229,7 +229,7 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -3m)\n  |> filter(fn: (r) => r._measurement == \"co2_equiv\" and r._field == \"valor\" and not (exists r.ubicacion and r.ubicacion == \"Simulador\"\
-          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)"
+          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B
@@ -281,7 +281,7 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -3m)\n  |> filter(fn: (r) => r._measurement == \"co2_equiv\" and r._field == \"valor\" and not (exists r.ubicacion and r.ubicacion == \"Simulador\"\
-          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)"
+          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B
@@ -438,7 +438,8 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r._measurement == \"calidad_aire_raw\" and r._field == \"valor\" and not (exists r.ubicacion and r.ubicacion ==\
-          \ \"Simulador\"))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)"
+          \ \"Simulador\"))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"\
+          ])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B
@@ -491,7 +492,8 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r._measurement == \"mq135_estado\" and r._field == \"valor\" and not (exists r.ubicacion and r.ubicacion == \"\
-          Simulador\"))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: max, createEmpty: false)"
+          Simulador\"))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: max, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"\
+          ])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B
@@ -595,7 +597,7 @@ groups:
           type: influxdb
           uid: influxdb
         query: "from(bucket: \"sensores\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r._measurement == \"temperatura\" and r._field == \"rssi\" and not (exists r.ubicacion and r.ubicacion == \"Simulador\"\
-          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)"
+          ))\n  |> group(columns: [\"cliente\", \"sensor\"])\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> keep(columns: [\"_time\", \"_value\", \"cliente\", \"sensor\"])"
         intervalMs: 1000
         maxDataPoints: 43200
     - refId: B

@@ -51,3 +51,12 @@ def test_umbrales_estrictos_de_temperatura_y_humedad():
         umbral = next(d for d in r["data"] if d["refId"] == "C")["model"]["conditions"][0]["evaluator"]
         assert (umbral["type"], umbral["params"]) == (op, [valor]), uid
         assert r["for"] == "3m", uid
+
+
+def test_consultas_por_serie_solo_devuelven_columnas_numericas():
+    """aggregateWindow con max/min conserva _field/_measurement/unidad y Grafana falla con 'wide series'."""
+    for r in _reglas():
+        for d in r["data"]:
+            q = d["model"].get("query", "")
+            if "aggregateWindow" in q:
+                assert "keep(columns" in q.split("aggregateWindow")[1], r["uid"]
